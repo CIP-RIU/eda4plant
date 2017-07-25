@@ -8,7 +8,7 @@
 #' @export
 
 
-edaplant_ui <- function(type = "tab", title = "Exploratory Analysis", name= "eda_plot_module"){
+edaplant_ui <- function(type = "tab", title = "Exploratory Data Analysis", name= "eda_plot_module"){
   
   shinydashboard::tabItem(tabName = name,
                           h2(title),   
@@ -27,7 +27,7 @@ edaplant_ui <- function(type = "tab", title = "Exploratory Analysis", name= "eda
                                                      br(),
                                                      br(),
                                                     # fluidRow(
-                                                       box(title = "Box title", "Box content",width = 10,
+                                                       box(title = "Box title", "Box content", width = 10,
                                                            
                                                            
                                                            
@@ -35,14 +35,14 @@ edaplant_ui <- function(type = "tab", title = "Exploratory Analysis", name= "eda
                                                            
                                                            
                                                       ),
-                                                       box(status = "warning", "Box content",width = 2,
+                                                       box(status = "warning", "Box content", width = 2,
                                                            br(),
                                                            br(),
                                                            
                                                            #shinyFiles::shinyFilesButton('file_genetic', 'Select File', 'Select a file',FALSE),
-                                                           selectInput("eda_type_chart", "Choose a graphic", choices = c("scatter","histogram"),selected = 1),
+                                                           selectInput("eda_type_chart", "Choose a graph", choices = c("scatterplot","histogram"), selected = 1),
                                                            selectInput('xcol', 'X Variable', names(iris), names(iris)[[1]]),
-                                                           selectInput('ycol', 'Y Variable', names(iris),selected=names(iris)[[2]])#,
+                                                           selectInput('ycol', 'Y Variable', names(iris), selected = names(iris)[[2]])#,
                                                            # numericInput('clusters', 'Cluster count', 3,
                                                            #              min = 1, max = 9)#,
                                                            )
