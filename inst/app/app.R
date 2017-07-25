@@ -6,6 +6,7 @@ library(ggplot2)
 #library(st4gi)
 #library(pepa)
 library(readxl)
+library(eda4plant)
 #library(knitr)
 
 tabNameS <- "eda_graph"
