@@ -5,14 +5,6 @@
 - Static Graphics: Box plots, histogram, bar plots, among others. 
 - Interactive Graphics: Biplots, density diagrams.
 
-## Required packages
-- #install.packages("shiny")
-- #install.packages("shinydashboard")
-- #install.packages("ggplot2")
-- #install.packages("ggrepel")
-- #install.packages("dplyr")
-- #install.packages("tidyr")
-
 ## Requiered packages eda4plant
 - devtools("CIP-RIU/eda4plant")
 
