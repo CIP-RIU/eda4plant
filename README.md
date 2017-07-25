@@ -1,6 +1,6 @@
 # eda4plant
 
-*eda4plant* aims to implement an Exploratory Data Analysis (EDA) for plant breeding trials. At the beginning, it might deliver:
+*eda4plant* aims to implement an Exploratory Data Analysis (EDA) module for plant breeding trials. At the beginning, it might deliver:
 
 - Static Graphics: Box plots, histogram, bar plots, among others. 
 - Interactive Graphics: Biplots, density diagrams.
