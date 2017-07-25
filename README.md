@@ -16,11 +16,6 @@
 ## Requiered packages eda4plant
 - devtools("CIP-RIU/eda4plant")
 
-- library(shiny)
-- library(shinydashboard)
-- library(ggplot2)
-- library(ggrepel)
-- library(dplyr)
-- library(tidyr)
 
 - library(eda4plant)
+Para correr la demo, en R poner: **eda4plant::shinyeda()** o solamente **shinyeda()**
