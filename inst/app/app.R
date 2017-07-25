@@ -1,11 +1,11 @@
 library(shiny)
 #library(DT)
 library(shinydashboard)
-library(shinyFiles)
+#library(shinyFiles)
 library(ggplot2)
 #library(st4gi)
 #library(pepa)
-library(readxl)
+#library(readxl)
 library(eda4plant)
 #library(knitr)
 

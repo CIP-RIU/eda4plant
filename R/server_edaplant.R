@@ -7,9 +7,9 @@
 #' @param values reactive values
 #' @author Omar Benites
 #' @importFrom shiny reactive tabPanel renderUI selectInput icon h2 uiOutput radioButtons actionButton br column fluidRow 
-#' @importFrom shinydashboard infoBox tabBox infoBoxOutput renderInfoBox
-#' @importFrom shinyFiles parseFilePaths
-#' @importFrom readxl read_excel
+#@importFrom shinydashboard infoBox tabBox infoBoxOutput renderInfoBox
+#@importFrom shinyFiles parseFilePaths
+#@importFrom readxl read_excel
 #' @export
 #' 
 
