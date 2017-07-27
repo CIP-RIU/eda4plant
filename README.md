@@ -1,6 +1,6 @@
 # eda4plant
 
-Important note: Do not use this package, it's still under development :construction:
+**Important note:** Do not use this package, it's still under development :construction: 
 
 *eda4plant* aims to implement an Exploratory Data Analysis (EDA) module for plant breeding trials. At the beginning, it might deliver:
 
