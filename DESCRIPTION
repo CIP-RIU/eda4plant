@@ -7,7 +7,9 @@ Depends: R (>= 3.3.0)
 Imports:
       shiny,
       shinydashboard,
-      ggplot2
+      ggplot2,
+      shinyFiles
+Remotes: omarbenites/shinyFiles
 Copyright: International Potato Center (2017)    
 License: GPL + file LICENSE
 Encoding: UTF-8

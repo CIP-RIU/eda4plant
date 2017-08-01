@@ -9,8 +9,7 @@
 #' 
 plot_corr <- function(fb, xcol, ycol){
 
-gg <- ggplot(fb, aes_(x=xcol, y=ycol)) + 
-  #geom_point(aes_(col= , size= )) + 
+gg <- ggplot(fb, aes_string(x=xcol, y=ycol)) + 
   geom_point() + 
   # xlim(c(0, 0.1)) + 
   # ylim(c(0, 500000)) + 
@@ -20,7 +19,7 @@ gg <- ggplot(fb, aes_(x=xcol, y=ycol)) +
        title="Scatterplot", 
        caption = "Source: CIP")
 
-print(gg)
+  print(gg)
 
 }
 
@@ -34,7 +33,7 @@ print(gg)
 plot_hist <- function(fb, xcol){
   
   
-  gg <-  ggplot(data = fb, aes_(x = xcol)) +
+  gg <-  ggplot(data = fb, aes_string(x = xcol)) +
         #geom_histogram(binwidth= 0.5, color="black", fill="grey", size=1)+
         geom_histogram( aes(y =..density..) , bins = 50, color="black", fill="grey", size=1)+
         # geom_vline(aes_(xintercept= mean(xcol)),
@@ -67,7 +66,7 @@ plot_hist <- function(fb, xcol){
 #'
 plot_bplot <- function(fb, xcol, ycol){
 
-    p <- ggplot(fb, aes_(x = xcol, y = ycol))
+    p <- ggplot(fb, aes_string(x = xcol, y = ycol))
     p + geom_boxplot()
     print(p)
 

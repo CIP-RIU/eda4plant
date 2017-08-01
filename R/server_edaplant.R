@@ -21,49 +21,77 @@ edaplant_server <- function(input, output, session, values){
                               restrictions=system.file(package='base'),filetypes=c('xlsx'))
   
   
-  # hot_path <- reactive ({
-  # 
-  #   #validate(
-  #   #  need(input$file != "", label = "Please enter an XLSX file. XLS files are forbidden")
-  #   #)
-  # 
-  #   if(length(input$file_genetic)==0){return (NULL)}
-  #   if(length(input$file_genetic)>0){
-  #     hot_file <- as.character(parseFilePaths(volumes, input$file_genetic)$datapath)
-  #   }
-  # })
-  # 
-  # hot_bdata <- reactive({
-  #   hot_file <- hot_path()
-  #   if(length(hot_file)==0){return (NULL)}
-  #   if(length(hot_file)>0){
-  #     hot_bdata <- readxl::read_excel(path=hot_file , sheet = "Fieldbook")
-  #   }
-  #   dat <- iris
-  #   dat
-  # })
-  
-  
-  
-  selectedData <- reactive({
-    iris
+  hot_path <- reactive ({
+
+    #validate(
+    #  need(input$file != "", label = "Please enter an XLSX file. XLS files are forbidden")
+    #)
+
+    if(length(input$file_eda)==0){return (NULL)}
+    if(length(input$file_eda)>0){
+      hot_file <- as.character(parseFilePaths(volumes, input$file_eda)$datapath)
+    }
   })
+
+  hot_bdata <- reactive({
+    hot_file <- hot_path()
+    if(length(hot_file)==0){return (NULL)}
+    if(length(hot_file)>0){
+      hot_bdata <- readxl::read_excel(path=hot_file , sheet = "Fieldbook")
+    }
+  
+    hot_bdata
+  })
+  
+  
+  
+  # selectedData <- reactive({
+  #   iris
+  # })
   
   # clusters <- reactive({
   #   kmeans(selectedData(), input$clusters)
   # })
   # 
+  
+  output$xcolumn <- renderUI({
+  
+    req(input$file_eda)
+    
+    vars <- names(hot_bdata())
+    
+    selectInput('xcol', 'X Variable', choices = vars, selected = 1)
+  
+  
+  })
+  
+  
+  output$ycolumn <- renderUI({
+    
+    req(input$file_eda)
+    
+    vars <- names(hot_bdata())
+    
+    selectInput('ycol', 'Y Variable', choices = vars, selected = 1)
+    
+    
+  })
+  
+  
+  
+  
   output$plot1 <- renderPlot({
     
-    
+    req(input$file_eda)
+    #print(hot_bdata())
     
     xcol <- input$xcol
     ycol <- input$ycol
     
-    fb <- selectedData()
-    # print(xcol)
-    # print(ycol)
-    # print(fb)
+    fb <- as.data.frame(hot_bdata())
+     # print(xcol)
+     # print(ycol)
+     # print(fb)
     palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
               "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
 
@@ -73,25 +101,27 @@ edaplant_server <- function(input, output, session, values){
     xdata <- fb[, xcol]
     ydata <- fb[, ycol]
     
-    print(xcol)
+    #print(xcol)
     # print(ycol)
     
     if(input$eda_type_chart=="histogram"){
 
-      res <- plot_hist(fb, xcol = xdata )
+      res <- plot_hist(fb, xcol = xcol )
       
     }
     
     
-   if(input$eda_type_chart == "scatter"){
-     
-     res <- plot_corr(fb, xcol= xdata, ycol = ydata)
+   if(input$eda_type_chart == "scatterplot"){
+     print("entro")
+     print(xcol)
+     print(ycol)
+     res <- plot_corr(fb, xcol= xcol, ycol = ycol)
      
    }
     
    if(input$eda_type_chart == "boxplot"){
       
-      res <- plot_bplot(fb, xcol= xdata, ycol = ydata)
+      res <- plot_bplot(fb, xcol= xcol, ycol = ycol)
       
     }
     
@@ -110,7 +140,7 @@ edaplant_server <- function(input, output, session, values){
   })
   
   
-  
+ 
   
   
   

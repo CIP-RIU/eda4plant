@@ -9,6 +9,8 @@
 
 ## Requiered packages eda4plant
 - `devtools("CIP-RIU/eda4plant")`
+- `devtools::install_github("omarbenites/shinyFiles")`
+
 
 
 - `library(eda4plant)`

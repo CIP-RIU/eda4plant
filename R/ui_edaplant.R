@@ -21,8 +21,8 @@ edaplant_ui <- function(type = "tab", title = "Exploratory Data Analysis", name=
                                    tabPanel("EDA", #begin tabset "CHECK"
                                             fluidRow( 
                                               column(width = 12,
-                                                     #shinyFiles::shinyFilesButton('file_eda', 'Select File', 'Select a file',FALSE),
-                                                     #infoBoxOutput("file_message_genetic", width = NULL) ,
+                                                     shinyFiles::shinyFilesButton('file_eda', 'Select File', 'Select a file',FALSE),
+                                                     infoBoxOutput("file_message_eda", width = NULL) ,
                                                      
                                                      br(),
                                                      br(),
@@ -40,9 +40,10 @@ edaplant_ui <- function(type = "tab", title = "Exploratory Data Analysis", name=
                                                            br(),
                                                            
                                                            #shinyFiles::shinyFilesButton('file_genetic', 'Select File', 'Select a file',FALSE),
-                                                           selectInput("eda_type_chart", "Choose a graph", choices = c("scatterplot","histogram"), selected = 1),
-                                                           selectInput('xcol', 'X Variable', names(iris), names(iris)[[1]]),
-                                                           selectInput('ycol', 'Y Variable', names(iris), selected = names(iris)[[2]])#,
+                                                           selectInput("eda_type_chart", "Choose a graph", choices = c("scatterplot","histogram"), selected = 2),
+                                                           uiOutput(outputId = "xcolumn",inline = TRUE),
+                                                           uiOutput(outputId = "ycolumn", inline = TRUE)
+                                                           
                                                            # numericInput('clusters', 'Cluster count', 3,
                                                            #              min = 1, max = 9)#,
                                                            )

@@ -4,7 +4,7 @@
 \alias{edaplant_ui}
 \title{UI for EDA}
 \usage{
-edaplant_ui(type = "tab", title = "Exploratory Analysis",
+edaplant_ui(type = "tab", title = "Exploratory Data Analysis",
   name = "eda_plot_module")
 }
 \arguments{
