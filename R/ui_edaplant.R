@@ -5,6 +5,8 @@
 #' @param type type of UI element, deault is a tab in a shinydashboard
 #' @param title diaply title name
 #' @param name UI TabName
+#' @importFrom shinydashboard box
+#' @importFrom shinyFiles parseFilePaths
 #' @export
 
 

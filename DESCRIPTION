@@ -9,7 +9,7 @@ Imports:
       shinydashboard,
       ggplot2,
       shinyFiles,
-      readxl,
+      readxl
 Remotes: omarbenites/shinyFiles
 Copyright: International Potato Center (2017)    
 License: GPL + file LICENSE
