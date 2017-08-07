@@ -1,3 +1,5 @@
+library(ggplot2)
+
 # Fake data for examples
 
 env <- gl(6, 100)
@@ -25,32 +27,46 @@ plot_dot <- function() {
 # Plots genotypes. Two options:
 # 1. Original values
 # 2. Means over replications
-# Plots genotypes by environment. Two options:
-# 1. Original values
-# 2. Means over replications
+# Use the by argument to get facets
 
-plot_box <- function() {
+plot_box <- function(trait, by = NULL, fb) {
   
-  ggplot(fb)
+  if(is.null(by)) {
+    ggplot(fb) +
+      geom_boxplot(aes_string(NA , trait)) +
+      xlab("")
+  } else {
+    ggplot(fb) +
+      geom_boxplot(aes_string(by, trait))
+  }
   
 }
+
+plot_box("y", fb = fb)
+plot_box("y", "env", fb)
+
 
 # Histogram
 # Plots genotypes. Two options:
 # 1. Original values
 # 2. Means over replications
-# Plots genotypes by environment. Two options:
-# 1. Original values
-# 2. Means over replications
+# Use the by argument to get facets
 
-plot_hist <- function(trait, bins, fb) {
+plot_hist <- function(trait, bins, by = NULL, fb) {
   
-  ggplot(fb) +
-    geom_histogram(aes_string(trait), bins = bins, col = 1, alpha = 0.5)
+  if(is.null(by)) {
+    ggplot(fb) +
+      geom_histogram(aes_string(trait), bins = bins, col = 1, alpha = 0.5)
+  } else {
+    ggplot(fb) +
+      geom_histogram(aes_string(trait), bins = bins, col = 1, alpha = 0.5) +
+      facet_wrap(by)
+  }
 
 }
 
-plot_hist("y", 20, fb)
+plot_hist("y", 15, fb = fb)
+plot_hist("y", 20, "env", fb)
 
 
 # Density plot
