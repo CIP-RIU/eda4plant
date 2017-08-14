@@ -5,9 +5,7 @@ library(ggplot2)
 env <- gl(6, 100)
 geno <- rep(gl(50, 2), 6)
 rep <- rep(gl(2, 1), 300)
-
 fb <- data.frame(env = env, geno = geno, rep = rep)
-
 fb$y <- rnorm(600, 100 + as.numeric(geno) * rnorm(1) + as.numeric(env))
 
 # Dotplot
@@ -29,21 +27,38 @@ plot_dot <- function() {
 # 2. Means over replications
 # Use the by argument to get facets
 
-plot_box <- function(trait, by = NULL, fb) {
+plot_box <- function(trait, by = NULL, dots = c("no", "yes"), fb) {
   
-  if(is.null(by)) {
-    ggplot(fb) +
-      geom_boxplot(aes_string(NA , trait)) +
-      xlab("")
+  dots <- match.arg(dots)
+  
+  if (dots == "no") {
+    if(is.null(by)) {
+      ggplot(fb, aes_string(shQuote(""), trait)) +
+        geom_boxplot() +
+        xlab("")
+      } else {
+        ggplot(fb, aes_string(by, trait)) +
+          geom_boxplot()
+      }
   } else {
-    ggplot(fb) +
-      geom_boxplot(aes_string(by, trait))
+    if(is.null(by)) {
+      ggplot(fb, aes_string(shQuote(""), trait)) +
+        geom_boxplot() +
+        xlab("") +
+        geom_jitter(width = 0.35)
+      } else {
+        ggplot(fb, aes_string(by, trait)) +
+          geom_boxplot() +
+          geom_jitter(width = 0.35)
+      }
   }
   
 }
 
 plot_box("y", fb = fb)
-plot_box("y", "env", fb)
+plot_box("y", dots = "yes", fb = fb)
+plot_box("y", "env", fb = fb)
+plot_box("y", "env", "yes", fb)
 
 
 # Histogram
