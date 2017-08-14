@@ -6,7 +6,15 @@ env <- gl(6, 100)
 geno <- rep(gl(50, 2), 6)
 rep <- rep(gl(2, 1), 300)
 fb <- data.frame(env = env, geno = geno, rep = rep)
-fb$y <- rnorm(600, 100 + as.numeric(geno) * rnorm(1) + as.numeric(env))
+envef <- rnorm(6, 0, 3)
+genoef <- rnorm(100, 2)
+
+foo <- function(x, envef, genoef) {
+    100 + envef[as.numeric(x[1])] + genoef[as.numeric(x[2])] + rnorm(1)
+}
+
+fb[, "y"] <- apply(fb[, c("env", "geno")], 1, foo, envef, genoef)
+
 
 # Dotplot
 # Plots replications by genotype
@@ -92,12 +100,23 @@ plot_hist("y", 20, "env", fb)
 # 1. Original values
 # 2. Means over replications
 
-plot_dens <- function() {
-  
-  ggplot(fb)
-  
+plot_dens <- function(trait, by = NULL, fb) {
+    
+    if(is.null(by)) {
+      ggplot(fb) +
+        geom_density(aes_string(trait))
+    } else {
+      ggplot(fb) +
+        geom_density(aes_string(trait)) +
+        facet_wrap(by)
+    }
+    
 }
 
+plot_dens("y", fb = fb)
+plot_dens("y", "env", fb)
+  
+  
 # AMMI and GGE
 # Only for MET data
 
