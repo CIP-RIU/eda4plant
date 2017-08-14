@@ -8,6 +8,7 @@ env <- gl(6, 100)
 geno <- rep(gl(50, 2), 6)
 rep <- rep(gl(2, 1), 300)
 fb <- data.frame(env = env, geno = geno, rep = rep)
+
 envef <- rnorm(6, 0, 3)
 genoef <- rnorm(100, 2)
 
@@ -15,8 +16,10 @@ foo <- function(x, envef, genoef) {
     100 + envef[as.numeric(x[1])] + genoef[as.numeric(x[2])] + rnorm(1)
 }
 
-fb[, "y"] <- apply(fb[, c("env", "geno")], 1, foo, envef, genoef)
+fb[, "y1"] <- apply(fb[, c("env", "geno")], 1, foo, envef, genoef)
 
+fb$y2 <- 20 + fb$y1 * 0.2 + rnorm(600)
+  
 
 # Boxplot and dotplot
 # Plots genotypes. Two options:
@@ -52,10 +55,10 @@ plot_box <- function(trait, by = NULL, dots = c("no", "yes"), fb) {
   
 }
 
-plot_box("y", fb = fb)
-plot_box("y", dots = "yes", fb = fb)
-plot_box("y", "env", fb = fb)
-plot_box("y", "env", "yes", fb)
+plot_box("y1", fb = fb)
+plot_box("y1", dots = "yes", fb = fb)
+plot_box("y1", "env", fb = fb)
+plot_box("y1", "env", "yes", fb)
 
 
 # Histogram
@@ -77,8 +80,8 @@ plot_hist <- function(trait, bins, by = NULL, fb) {
 
 }
 
-plot_hist("y", 15, fb = fb)
-plot_hist("y", 20, "env", fb)
+plot_hist("y1", 15, fb = fb)
+plot_hist("y1", 20, "env", fb)
 
 
 # Density plot
@@ -102,19 +105,10 @@ plot_dens <- function(trait, by = NULL, fb) {
     
 }
 
-plot_dens("y", fb = fb)
-plot_dens("y", "env", fb)
+plot_dens("y1", fb = fb)
+plot_dens("y1", "env", fb)
   
   
-# AMMI and GGE
-# Only for MET data
-
-plot_ammi <- function() {
-  
-  ggplot(fb)
-  
-}
-
 # Scatterplot
 # Plots two traits.
 # Options:
@@ -123,12 +117,30 @@ plot_ammi <- function() {
 # 3. Means over replications and environments.
 # With facets:
 # One facet for each environment
-# With several traits:
-# Matrix scatterplot
 
-plot_scat <- function() {
+plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
+  
+  if (is.null(by)) {
+    ggplot(fb, aes_string(trait.1, trait.2)) +
+      geom_point() +
+      geom_smooth()    
+  } else {
+    ggplot(fb, aes_string(trait.1, trait.2)) +
+      geom_point() +
+      geom_smooth() +
+      facet_wrap(by)
+  }
+
+}
+
+plot_scat("y1", "y2", fb = fb)
+plot_scat("y1", "y2", "env", fb)
+
+# AMMI and GGE
+# Only for MET data
+
+plot_ammi <- function(fb) {
   
   ggplot(fb)
   
 }
-
