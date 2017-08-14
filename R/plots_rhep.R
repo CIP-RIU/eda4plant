@@ -1,3 +1,5 @@
+# Libraries
+
 library(ggplot2)
 
 # Fake data for examples
@@ -16,20 +18,7 @@ foo <- function(x, envef, genoef) {
 fb[, "y"] <- apply(fb[, c("env", "geno")], 1, foo, envef, genoef)
 
 
-# Dotplot
-# Plots replications by genotype
-# Recomended for up to 15 genotypes
-# Plots genotypes by environment. Two options:
-# 1. Original values
-# 2. Means over replications
-
-plot_dot <- function() {
-
-  ggplot(fb)
-  
-}
-
-# Boxplot
+# Boxplot and dotplot
 # Plots genotypes. Two options:
 # 1. Original values
 # 2. Means over replications
