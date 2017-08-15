@@ -1,6 +1,8 @@
 # Libraries
 
+library(ggrepel)
 library(ggplot2)
+library(st4gi)
 
 # Fake data for examples
 
@@ -139,8 +141,66 @@ plot_scat("y1", "y2", "env", fb)
 # AMMI and GGE
 # Only for MET data
 
-plot_ammi <- function(fb) {
+plot_ammi <- function(model, biplot) {
+
+  # arguments
   
-  ggplot(fb)
+  method <- model$Method
+  trait <- model$Trait
+  overall.mean <- model$Overall_mean
+  geno.mean <- model$Genotype_means
+  env.mean <- model$Environment_means
+  int.mean <- model$Interaction_means
+  G <- model$PC_values_genotypes
+  E <- model$PC_values_environments
+  PC.cont <- model$Contribution_PCs$Cont
+
+  #  Biplot 1
+  
+  if (biplot == 1) {
+    
+    title <- paste(method, " biplot1 for ", trait, sep = "")
+    xlab <- "Genotype and environment effects"
+    ylab <- paste("PC1 (", format(PC.cont[1], digits = 3), "%)")
+    
+    xcorg <- geno.mean - overall.mean
+    xcore <- env.mean - overall.mean
+    
+    fbg <- data.frame(names = rownames(int.mean), x = xcorg, y = G[, 1], group = "g")
+    fbe <- data.frame(names = colnames(int.mean), x = xcore, y = E[, 1], group = "e")
+    fb <- rbind(fbg, fbe)
+    
+  }
+  
+  # Biplot 2
+  
+  if (biplot == 2) {
+    
+    title <- paste(method, " biplot2 for ", trait, sep = "")
+    xlab <- paste("PC1 (", format(PC.cont[1], digits = 3), "%)")
+    ylab <- paste("PC2 (", format(PC.cont[2], digits = 3), "%)")
+    
+    fbg <- data.frame(names = rownames(int.mean), x = G[, 1], y = G[, 2], group = "g")
+    fbe <- data.frame(names = colnames(int.mean), x = E[, 1], y = E[, 2], group = "e")
+    fb <- rbind(fbg, fbe)
+  
+  }  
+  
+  ggplot(fb, aes(x, y, label = names, color = factor(group))) + 
+    geom_point() + 
+    geom_text_repel() +
+    geom_hline(yintercept = 0, lty = 2) +
+    geom_vline(xintercept = 0, lty = 2) +
+    labs(title = title, x = xlab, y = ylab) +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    theme(legend.position = "none")
   
 }
+
+model <- ammi("y", "geno", "env", "rep", met8x12)
+plot_ammi(model, 1)
+plot_ammi(model, 2)
+
+model <- ammi("y", "geno", "env", "rep", met8x12, method = "gge")
+plot_ammi(model, 1)
+plot_ammi(model, 2)
