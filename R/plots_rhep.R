@@ -1,7 +1,8 @@
 # Libraries
 
-library(ggrepel)
 library(ggplot2)
+library(ggrepel)
+library(GGally)
 library(st4gi)
 
 # Fake data for examples
@@ -19,9 +20,9 @@ foo <- function(x, envef, genoef) {
 }
 
 fb[, "y1"] <- apply(fb[, c("env", "geno")], 1, foo, envef, genoef)
-
 fb$y2 <- 20 + fb$y1 * 0.2 + rnorm(600)
-  
+fb$y3 <- 50 - fb$y1 * 0.1 + 0.2 * fb$y2 + rnorm(600)
+
 
 # Boxplot and dotplot
 # Plots genotypes. Two options:
@@ -111,8 +112,7 @@ plot_dens("y1", fb = fb)
 plot_dens("y1", "env", fb)
   
   
-# Scatterplot
-# Plots two traits.
+# Scatterplot for two traits
 # Options:
 # 1. Original values.
 # 2. Means over replications.
@@ -137,6 +137,21 @@ plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
 
 plot_scat("y1", "y2", fb = fb)
 plot_scat("y1", "y2", "env", fb)
+
+
+# Scatterplot for more than two traits
+# Options:
+# 1. Original values.
+# 2. Means over replications.
+# 3. Means over replications and environments.
+
+plot_pairs <- function(traits, fb) {
+  
+  ggpairs(fb, columns = traits, lower = list(continuous = "smooth"))
+
+}
+
+plot_pairs(traits, fb)
 
 
 # AMMI and GGE
