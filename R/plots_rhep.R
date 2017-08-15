@@ -138,8 +138,10 @@ plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
 plot_scat("y1", "y2", fb = fb)
 plot_scat("y1", "y2", "env", fb)
 
+
 # AMMI and GGE
 # Only for MET data
+# Should run function ammi first
 
 plot_ammi <- function(model, biplot) {
 
