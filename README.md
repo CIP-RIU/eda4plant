@@ -1,11 +1,8 @@
  eda4plant
 --------------------------
-[![Build Status](https://travis-ci.org/CIP-RIU/eda4plant.svg?branch=master)]
-(https://travis-ci.org/CIP-RIU/eda4plant)
-[![Build status](https://ci.appveyor.com/api/projects/status/1enl03fsmek2x34f?svg=true)]
-(https://ci.appveyor.com/project/cipriuhq/eda4plant)
-[![Coverage Status](https://coveralls.io/repos/github/CIP-RIU/eda4plant/badge.svg)]
-(https://coveralls.io/github/CIP-RIU/eda4plant)
+[![Build Status](https://travis-ci.org/CIP-RIU/eda4plant.svg?branch=master)](https://travis-ci.org/CIP-RIU/eda4plant)
+[![Build status](https://ci.appveyor.com/api/projects/status/1enl03fsmek2x34f?svg=true)](https://ci.appveyor.com/project/cipriuhq/eda4plant)
+[![Coverage Status](https://coveralls.io/repos/github/CIP-RIU/eda4plant/badge.svg)](https://coveralls.io/github/CIP-RIU/eda4plant)
 
 
 **Important note:** Do not use this package, it's still under development :construction: 
