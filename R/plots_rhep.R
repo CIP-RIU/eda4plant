@@ -151,7 +151,7 @@ plot_pairs <- function(traits, fb) {
 
 }
 
-plot_pairs(traits, fb)
+#plot_pairs(traits, fb)
 
 
 # AMMI and GGE

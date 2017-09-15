@@ -4,7 +4,7 @@
 \alias{plot_hist}
 \title{histogram}
 \usage{
-plot_hist(fb, xcol)
+plot_hist(trait, bins, by = NULL, fb)
 }
 \arguments{
 \item{fb}{datos}
