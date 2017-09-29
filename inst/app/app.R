@@ -7,6 +7,7 @@ library(ggplot2)
 #library(pepa)
 library(readxl)
 library(eda4plant)
+
 #library(knitr)
 
 tabNameS <- "eda_graph"
@@ -17,7 +18,7 @@ server <- function(input, output, session,values) {
 }
 
 ui <- dashboardPage(skin = "yellow",
-                    dashboardHeader(title = "Exploratory Data Analysis"),
+                    dashboardHeader(title = ""),
                     dashboardSidebar(width = 200,
                                      menuItem("Resources",
                                               sidebarMenu(id = "menu",

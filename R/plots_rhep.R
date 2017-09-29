@@ -22,10 +22,18 @@ foo <- function(x, envef, genoef) {
 fb[, "y1"] <- apply(fb[, c("env", "geno")], 1, foo, envef, genoef)
 fb$y2 <- 20 + fb$y1 * 0.2 + rnorm(600)
 fb$y3 <- 50 - fb$y1 * 0.1 + 0.2 * fb$y2 + rnorm(600)
+# 
 
 
-# Boxplot and dotplot
-# Plots genotypes. Two options:
+#' Boxplot and dotplot
+#' 
+#' @description Plots genotypes. Two options:
+#' @param trait trait
+#' @param by grouped by
+#' @param dots use dot 
+#' @param fb field book data
+#' @author Raul Eyzaguirre
+#' @export
 # 1. Original values
 # 2. Means over replications
 # Use the by argument to get facets
@@ -43,7 +51,9 @@ plot_box <- function(trait, by = NULL, dots = c("no", "yes"), fb) {
         ggplot(fb, aes_string(by, trait)) +
           geom_boxplot()
       }
+    
   } else {
+    
     if(is.null(by)) {
       ggplot(fb, aes_string(shQuote(""), trait)) +
         geom_boxplot() +
@@ -58,14 +68,21 @@ plot_box <- function(trait, by = NULL, dots = c("no", "yes"), fb) {
   
 }
 
-plot_box("y1", fb = fb)
-plot_box("y1", dots = "yes", fb = fb)
-plot_box("y1", "env", fb = fb)
-plot_box("y1", "env", "yes", fb)
+# plot_box("y1", fb = fb)
+# plot_box("y1", dots = "yes", fb = fb)
+# plot_box("y1", "env", fb = fb)
+# plot_box("y1", "env", "yes", fb)
+# 
 
-
-# Histogram
-# Plots genotypes. Two options:
+#' Histogram
+#' @description Plots genotypes. Two options:
+#' @param trait trait
+#' @param bins number of partitions or intervals.
+#' @param by grouped by
+#' @param fb field book data
+#' @author Raul Eyzaguirre
+#' @export
+#' 
 # 1. Original values
 # 2. Means over replications
 # Use the by argument to get facets
@@ -82,19 +99,19 @@ plot_hist <- function(trait, bins, by = NULL, fb) {
   }
 
 }
+# 
+# plot_hist("y1", 15, fb = fb)
+# plot_hist("y1", 20, "env", fb)
 
-plot_hist("y1", 15, fb = fb)
-plot_hist("y1", 20, "env", fb)
 
-
-# Density plot
-# Plots genotypes. Two options:
-# 1. Original values
-# 2. Means over replications
-# Plots genotypes by environment. Two options:
-# 1. Original values
-# 2. Means over replications
-
+#' Density plot
+#' @description Plots genotypes. Two options: # 1. original values or #2, means over replications
+#' @param trait trait
+#' @param by grouped by
+#' @param fb field book data
+#' @author Raul Eyzaguirre
+#' @export
+#' 
 plot_dens <- function(trait, by = NULL, fb) {
     
     if(is.null(by)) {
@@ -108,18 +125,19 @@ plot_dens <- function(trait, by = NULL, fb) {
     
 }
 
-plot_dens("y1", fb = fb)
-plot_dens("y1", "env", fb)
-  
-  
-# Scatterplot for two traits
-# Options:
-# 1. Original values.
-# 2. Means over replications.
-# 3. Means over replications and environments.
-# With facets:
-# One facet for each environment
-
+# plot_dens("y1", fb = fb)
+# plot_dens("y1", "env", fb)
+#   
+#   
+#'  Scatterplot for two traits
+#' @description Options: # 1. Original values, #2. Means over replications and  #3. Means over replications and environments. With facets: # One facet for each environment
+#' @param trait trait.1
+#' @param trait trait.2
+#' @param by grouped by
+#' @param fb field book data
+#' @author Raul Eyzaguirre
+#' @export
+#' 
 plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
   
   if (is.null(by)) {
@@ -135,16 +153,17 @@ plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
 
 }
 
-plot_scat("y1", "y2", fb = fb)
-plot_scat("y1", "y2", "env", fb)
+# plot_scat("y1", "y2", fb = fb)
+# plot_scat("y1", "y2", "env", fb)
 
 
-# Scatterplot for more than two traits
-# Options:
-# 1. Original values.
-# 2. Means over replications.
-# 3. Means over replications and environments.
-
+#' Scatterplot for more than two traits
+#' @description Options: #1. Original values. #2. Means over replications.#3. Means over replications and environments.
+#' @param traits traits that we displayed in a dispersion matrix.
+#' @param fb field book data
+#' @author Raul Eyzaguirre
+#' @export
+#' 
 plot_pairs <- function(traits, fb) {
   
   ggpairs(fb, columns = traits, lower = list(continuous = "smooth"))
@@ -154,14 +173,16 @@ plot_pairs <- function(traits, fb) {
 #plot_pairs(traits, fb)
 
 
-# AMMI and GGE
-# Only for MET data
-# Should run function ammi first
-
+#' AMMI and GGE 
+#' @description Only for MET data # Should run function ammi first
+#' @param model model 
+#' @param biplot 1. genotype and environment effects. 2. principal components
+#' @author Raul Eyzaguirre
+#' @export
+#' 
 plot_ammi <- function(model, biplot) {
 
   # arguments
-  
   method <- model$Method
   trait <- model$Trait
   overall.mean <- model$Overall_mean
@@ -214,10 +235,10 @@ plot_ammi <- function(model, biplot) {
   
 }
 
-model <- ammi("y", "geno", "env", "rep", met8x12)
-plot_ammi(model, 1)
-plot_ammi(model, 2)
-
-model <- ammi("y", "geno", "env", "rep", met8x12, method = "gge")
-plot_ammi(model, 1)
-plot_ammi(model, 2)
+# model <- ammi("y", "geno", "env", "rep", met8x12)
+# plot_ammi(model, 1)
+# plot_ammi(model, 2)
+# 
+# model <- ammi("y", "geno", "env", "rep", met8x12, method = "gge")
+# plot_ammi(model, 1)
+# plot_ammi(model, 2)

@@ -1,7 +1,10 @@
 Package: eda4plant
 Title: Exploratory Data Analysis for Plant Breeding Experiments (one line, title case)
 Version: 0.0.1
-Authors@R: person("Omar", "Benites", email = "o.benites@cgiar.org", role = c("aut", "cre"))
+Authors@R: c(
+         person("Omar", "Benites", email = "o.benites@cgiar.org", role = c("aut", "cre")),
+         person("Eyzaguirre", "Raul", email = "r.eyzaguirre@cgiar.org", role = c("aut"))
+           )
 Description: The aim of ed4plant consists on making an exploration of plant breeding data through static and interactive statistical visualizations. These visualization are plotted with journal's themes to give the opportutiny to publish results just downloading the graph from HIDAP.
 Depends: R (>= 3.3.0)
 Imports:
@@ -10,11 +13,14 @@ Imports:
       ggplot2,
       shinyFiles,
       readxl,
-      GGally
+      GGally,
+      ggrepel,
+      st4gi
 Remotes: omarbenites/shinyFiles
 Copyright: International Potato Center (2017)    
 License: GPL + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Suggests: covr
+Suggests: covr,
+    testthat
