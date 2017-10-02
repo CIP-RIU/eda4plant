@@ -7,9 +7,9 @@
 plot_pairs(traits, fb)
 }
 \arguments{
-\item{traits}{traits that we displayed in a dispersion matrix.}
-
 \item{fb}{field book data}
+
+\item{columns}{traits that we displayed in a dispersion matrix.}
 }
 \description{
 Options: #1. Original values. #2. Means over replications.#3. Means over replications and environments.

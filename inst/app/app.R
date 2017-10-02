@@ -7,7 +7,9 @@ library(ggplot2)
 #library(pepa)
 library(readxl)
 library(eda4plant)
-
+library(st4gi)
+library(GGally)
+library(ggrepel)
 #library(knitr)
 
 tabNameS <- "eda_graph"

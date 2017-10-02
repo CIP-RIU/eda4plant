@@ -107,22 +107,24 @@ edaplant_server <- function(input, output, session, values){
     fb <- as.data.frame(hot_bdata()) #fieldboook
     trait <- input$trait_eda    #trait  
     gby <- input$gby_eda        #grouped by
-    use_dots <<- input$dots_eda  #plot points in charts
+    use_dots <- input$dots_eda  #plot points in charts
     bins <- input$bins_eda      #histogram
     
     traitX <- input$trait_x_eda #scatterplot
     traitY <- input$trait_y_eda #scatterplot
     
-    pairs <-  input$pairs_trait_eda #pairsplot
-    print(fb)
-    print(trait)
-    print(use_dots)
-    print(gby)
+    pairs_trait <-  input$pairs_trait_eda #pairsplot
+    # print(fb)
+    # print(trait)
+    # print(use_dots)
+    # print(gby)
     #print(bins)
     #cat(trait, use_dots, gby)
     
     if(input$eda_type_chart=="boxplot"){
 
+      req(input$trait_eda)
+        
        if(gby == "" || is.null(gby)){
         
            res_plot <- plot_box(trait = trait, fb = fb)
@@ -188,12 +190,33 @@ edaplant_server <- function(input, output, session, values){
     }
     
     if(input$eda_type_chart == "pairsplot"){
+      fb <- fb
       
-      res_plot <- plot_pairs(traits, fb)
+      cols_pairs <- lapply(X = 1:length(pairs_trait), function(x)which(names(fb)==pairs_trait[x])) %>% unlist()
+      
+      res_plot <- plot_pairs(traits = cols_pairs, fb = fb)
 
     }
     
-    res <- res_plot
+    
+    if(input$eda_type_chart=="boxplot" || input$eda_type_chart=="histogram" || input$eda_type_chart == "scatterplot" 
+       || input$eda_type_chart == "density" || input$eda_type_chart == "pairsplot"){
+      
+      if(input$sel_orientation_eda=="none"){
+        res_plot <- res_plot + theme(axis.text.x=element_text(angle=0, hjust=1, vjust=0.5))
+      }
+      
+      if(input$sel_orientation_eda=="45°"){
+        res_plot <- res_plot + theme(axis.text.x=element_text(angle=45, hjust=1, vjust=0.5))
+      } 
+      
+      if(input$sel_orientation_eda=="90°"){  
+        res_plot <- res_plot + theme(axis.text.x=element_text(angle=90, hjust=1, vjust=0.5))
+      }
+      #source https://stackoverflow.com/questions/1330989/rotating-and-spacing-axis-labels-in-ggplot2 
+    }
+    
+    res <- res_plot 
     
     print(res)
   })

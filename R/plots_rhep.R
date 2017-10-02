@@ -159,14 +159,14 @@ plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
 
 #' Scatterplot for more than two traits
 #' @description Options: #1. Original values. #2. Means over replications.#3. Means over replications and environments.
-#' @param traits traits that we displayed in a dispersion matrix.
+#' @param columns traits that we displayed in a dispersion matrix.
 #' @param fb field book data
 #' @author Raul Eyzaguirre
 #' @export
 #' 
 plot_pairs <- function(traits, fb) {
   
-  ggpairs(fb, columns = traits, lower = list(continuous = "smooth"))
+  ggpairs(data = fb, columns = traits, lower = list(continuous = "smooth"))
 
 }
 
