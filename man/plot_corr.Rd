@@ -16,3 +16,4 @@ plot_corr(fb, xcol, ycol)
 \description{
 plot the scatter plot
 }
+

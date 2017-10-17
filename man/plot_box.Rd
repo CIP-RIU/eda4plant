@@ -21,3 +21,4 @@ Plots genotypes. Two options:
 \author{
 Raul Eyzaguirre
 }
+

@@ -2,7 +2,6 @@
 % Please edit documentation in R/plot.R, R/plots_rhep.R
 \name{plot_hist}
 \alias{plot_hist}
-\alias{plot_hist}
 \title{histogram}
 \usage{
 plot_hist(trait, bins, by = NULL, fb)
@@ -30,3 +29,4 @@ Plots genotypes. Two options:
 \author{
 Raul Eyzaguirre
 }
+

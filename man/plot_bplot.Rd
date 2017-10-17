@@ -16,3 +16,4 @@ plot_bplot(fb, xcol, ycol)
 \description{
 plot the boxplot
 }
+
