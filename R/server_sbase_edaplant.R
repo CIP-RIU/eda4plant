@@ -25,11 +25,7 @@ edaplant_sbase_server <- function(input, output, session, values){
       #ToDo: In case of poor conection print a message and do not show anything
       
       incProgress(1/5, detail = paste("..."))
-      
-      # validate(
-      #  need(input$connect_single_sbase != "", label = "Please connect to SweetPotato Base")
-      # )
-      
+
       white_list <- brapi::ba_db()
       #establish connection
       incProgress(3/5, detail = paste("..."))
@@ -99,7 +95,7 @@ edaplant_sbase_server <- function(input, output, session, values){
     study_name <- sbase_data %>% select(studyName)
     study_name <- study_name[[1]] %>% unique()
     
-    selectInput('eda_sbase_studyName', 'Select study', c(Choose='', study_name), selectize=TRUE)
+    selectInput('eda_sbase_studyName', 'Select study', c(Choose='', study_name),multiple = TRUE, selectize=TRUE)
     
   })
   
@@ -109,22 +105,85 @@ edaplant_sbase_server <- function(input, output, session, values){
   hot_fb_sbase <- reactive({
     
     req(input$eda_sbase_studyName)
-    
     #sbase_data <- hot_bdata() #extracting informatin from sbase (credentials and fieldbook) #using button for connecting to SBASE
     sbase_data <- values$hot_bdata
-    
     sbase_fb <- sbase_data$trial_table
     credentials <- sbase_data$sp_base_credentials
     
+    if(length(input$eda_sbase_studyName)==1){
+    
+   
+   
     col_fb_sbase <- sbase_fb %>% dplyr::filter(programName== input$eda_selProgram_sbase, trialName == input$eda_sbase_trialName, studyName == input$eda_sbase_studyName)
     
     dt <-  ba_studies_table(credentials , studyDbId = as.character(col_fb_sbase$studyDbId))
+    #dt
+    }
     
-    dt
-    
+    if(length(input$eda_sbase_studyName)>1){
+      
+      program <- input$eda_selProgram_sbase
+      trial <- input$eda_sbase_trialName
+      study <- input$eda_sbase_studyName
+      
+      #Vector with all the studies selected by users
+      sel_multi_study <-  sbase_fb %>%  
+                          filter(programName %in% program) %>% 
+                          filter(trialName %in% trial) %>% 
+                          filter(studyName %in% study)
+      
+      #id of selected studies
+      id_study <- sel_multi_study$studyDbId
+      
+      #number of studies
+      n <- length(id_study)
+      #Inizialitation of empty list. It storages of all datasets selected by users 
+      combine <- vector(mode="list", length = n)
+      
+      if(length(id_study)==0){return (NULL)}
+      
+      if(length(id_study)>=1 && length(id_study)<2 ) {
+        flag <- FALSE
+       shinysky::showshinyalert(session, "alert_met_sbase_done", paste("Select at least 3 studies (fieldbooks)"), styleclass = "warning")
+        return (NULL)
+      }
+      
+      if(length(id_study)>=2){
+        
+        #Inizialitation of environment vector.
+        ENVIRONMENT <- vector(mode = "character", length = n )
+        
+        for(i in 1:n){
+          
+          combine[[i]] <-  brapi::ba_studies_table(credentials , studyDbId = as.character(id_study[i])) #get fieldbook and then storage
+          ENVIRONMENT <- paste("ENV", unique(combine[[i]][["locationName"]]), i, sep="_")#create a differente environment ID despite of having the same location.
+          #put environment columns aside to each fieldbook.
+          combine[[i]] <- cbind(ENVIRONMENT, combine[[i]])
+        }
+        
+        #join books. The fieldbook books were previously combined.
+        join_books <- data.table::rbindlist(combine,fill = TRUE)
+        join_books <- as.data.frame(join_books)
+        #write.csv(join_books,"join_books.csv")
+        shinysky::showshinyalert(session, "alert_met_sbase_done", paste("Great!. Perform your MET analysis"), styleclass = "success")
+        #met_bdata <- readxl::read_excel(path=hot_file , sheet = "Fieldbook")
+        #write.csv(join_books,"metdata.csv")
+        join_books <- purrr::map_at(.x = join_books,.at = 1:16,.f = as.factor)  %>% as.data.frame(stringsAsFactors = FALSE)
+        dt <- join_books
+    }
+ 
+  }
+    #print(dt)
+    dt <- dt
     
   })
+  ###############
+
   
+  #get inputs
+ 
+  
+  ##############
   
   output$sel_trait_eda <- renderUI({
     
@@ -162,13 +221,13 @@ edaplant_sbase_server <- function(input, output, session, values){
     req(input$eda_sbase_studyName)
     req(input$trait_eda)  
     #vars <- names(hot_fb_sbase())
-    selectInput(inputId = 'dots_eda', 'Use dots', choices = c("no", "yes"), selected = 1 )
+    selectInput(inputId = 'dots_eda', 'Use dots', choices = c("yes", "no"), selected = 1 )
   })
   
   
   output$sel_traitX_eda <- renderUI({
     req(input$eda_sbase_studyName)
-    vars <- names(hot_fb_sbase())
+    #vars <- names(hot_fb_sbase())
     selectInput(inputId = 'trait_x_eda', 'Select trait (X)', c(Choose='', vars), selectize=TRUE)
     
   })
@@ -176,10 +235,54 @@ edaplant_sbase_server <- function(input, output, session, values){
   output$sel_traitY_eda <- renderUI({
     req(input$eda_sbase_studyName)
     vars <- names(hot_fb_sbase())
-    print(vars)
+    #print(vars)
     selectInput(inputId = 'trait_y_eda', 'Select trait (Y)',  c(Choose='', vars), selectize=TRUE)
     
   })
+  
+  ########### AMMI or GGE######################
+  
+  output$sel_trait_ammi_eda <- renderUI({
+    req(input$eda_sbase_studyName)
+    vars <- names(hot_fb_sbase())
+    #print(vars)
+    selectInput(inputId = 'trait_ammi_eda', 'Select trait',  c(Choose='', vars), selectize=TRUE)
+    
+  })
+  
+  output$sel_method_ammi_eda <- renderUI({
+    req(input$eda_sbase_studyName)
+    vars <- names(hot_fb_sbase())
+    #print(vars)
+    selectInput(inputId = 'method_ammi_eda', 'Select Method',  c("ammi", "gge"), selected = 1)
+    
+  })
+  
+  output$sel_env_ammi_eda <- renderUI({
+    req(input$eda_sbase_studyName)
+    vars <- names(hot_fb_sbase())
+    #print(vars)
+    selectInput(inputId = 'env_ammi_eda', 'Select Environment',  c(Choose='', vars), selectize=TRUE)
+    
+  })
+  
+  output$sel_gen_ammi_eda <- renderUI({
+    req(input$eda_sbase_studyName)
+    vars <- names(hot_fb_sbase())
+    #print(vars)
+    selectInput(inputId = 'gen_ammi_eda', 'Select Genotype',  c(Choose='', vars), selectize=TRUE)
+    
+  })
+  
+  output$sel_rep_ammi_eda <- renderUI({
+    req(input$eda_sbase_studyName)
+    vars <- names(hot_fb_sbase())
+    #print(vars)
+    selectInput(inputId = 'rep_ammi_eda', 'Select Repetition',  c(Choose='', vars), selectize=TRUE)
+    
+  })
+  
+  ####### end AMMI or GGE ######################
   
   output$plot1 <- renderPlot({
     
@@ -221,7 +324,7 @@ edaplant_sbase_server <- function(input, output, session, values){
       trait<-  fb[, trait]
       
       
-      req(input$trait_eda)
+      #req(input$trait_eda)
       
       if(gby == "" || is.null(gby)){
         
@@ -320,6 +423,42 @@ edaplant_sbase_server <- function(input, output, session, values){
       
     }
     
+    if(input$eda_type_chart == "ammi"){
+      
+      req(input$trait_ammi_eda)
+      req(input$method_ammi_eda)
+      req(input$env_ammi_eda)
+      req(input$gen_ammi_eda)
+      req(input$rep_ammi_eda)
+      
+      fb <- hot_fb_sbase()  
+      trait <- input$trait_ammi_eda    #trait
+      #trait<-  fb[, trait]
+      method <- input$method_ammi_eda
+      env <- input$env_ammi_eda
+      gen <- input$env_ammi_eda
+      rep <- input$rep_ammi_eda
+      
+     
+      
+      if(method=="ammi") {  
+        model <- ammi(trait, gen, env, rep, data =fb,  method = "ammi" )
+        res_plot  <- plot_ammi(model, 1) 
+        
+      }
+      if(method=="gge")  {  
+        model <- ammi(trait, gen, env, rep, data =  fb, method = "gge" )
+        res_plot <- plot_ammi(model, 2) 
+      }
+      
+     
+ 
+    }
+    
+    
+    
+    
+    
     
     if(input$eda_type_chart=="boxplot" || input$eda_type_chart=="histogram" || input$eda_type_chart == "scatterplot" 
        || input$eda_type_chart == "density" || input$eda_type_chart == "pairsplot"){
@@ -339,6 +478,7 @@ edaplant_sbase_server <- function(input, output, session, values){
     }
     
     
+    
     if(input$xlabel_graph!=""){
       res_plot <- res_plot + xlab(input$xlabel_graph)
     }
@@ -348,7 +488,6 @@ edaplant_sbase_server <- function(input, output, session, values){
     }
     
     res <- res_plot 
-    
     #dev.off()
     
     print(res)

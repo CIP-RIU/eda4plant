@@ -60,8 +60,8 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                                                               conditionalPanel(
                                                                 condition = "input.eda_type_chart =='boxplot'|
                                                                 input.eda_type_chart=='histogram'|
-                                                                input.eda_type_chart=='density'|
-                                                                input.eda_type_chart=='ammi'", 
+                                                                input.eda_type_chart=='density'",#|
+                                                                #input.eda_type_chart=='ammi'", 
                                                                 
                                                                 uiOutput("sel_trait_eda")
                                                               ),
@@ -86,7 +86,22 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                                                               conditionalPanel( 
                                                                 condition = "input.eda_type_chart =='histogram'",
                                                                 uiOutput("sel_bins_eda")
+                                                              ),
+                                                              
+                                                              conditionalPanel( 
+                                                                condition = "input.eda_type_chart =='ammi'",
+                                                                uiOutput("sel_trait_ammi_eda"),
+                                                                shinysky::shinyalert("alert_met_sbase_done", FALSE, auto.close.after = 1)
+                                                              ),
+                                                              
+                                                              conditionalPanel( 
+                                                                condition = "input.eda_type_chart =='ammi'",
+                                                                uiOutput("sel_method_ammi_eda"),
+                                                                uiOutput("sel_env_ammi_eda"),
+                                                                uiOutput("sel_gen_ammi_eda"),
+                                                                uiOutput("sel_rep_ammi_eda")
                                                               )#,
+                                                              
                                                               
                                                        ),#end column 3
                                                        #),#end fluidRow edatypechart
@@ -125,10 +140,10 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                                                      
                                                      column(3,
                                                             textInput(inputId = "xlabel_graph",
-                                                                      label = "Caption:",
+                                                                      label = "X label",
                                                                       value = ""),
                                                             textInput(inputId = "ylabel_graph",
-                                                                      label = "Caption:",
+                                                                      label = "Y label",
                                                                       value = "")#,
                                                             #downloadButton('downloadReport', label = "Download the plot")
                                                             
