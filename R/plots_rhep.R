@@ -14,7 +14,7 @@
 # 
 # envef <- rnorm(6, 0, 3)
 # genoef <- rnorm(100, 2)
-# # 
+# #
 # foo <- function(x, envef, genoef) {
 #     100 + envef[as.numeric(x[1])] + genoef[as.numeric(x[2])] + rnorm(1)
 # }
@@ -22,7 +22,7 @@
 # fb[, "y1"] <- apply(fb[, c("env", "geno")], 1, foo, envef, genoef)
 # fb$y2 <- 20 + fb$y1 * 0.2 + rnorm(600)
 # fb$y3 <- 50 - fb$y1 * 0.1 + 0.2 * fb$y2 + rnorm(600)
-# # 
+# #
 
 
 #' Boxplot and dotplot

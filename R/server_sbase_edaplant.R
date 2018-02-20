@@ -227,7 +227,7 @@ edaplant_sbase_server <- function(input, output, session, values){
   
   output$sel_traitX_eda <- renderUI({
     req(input$eda_sbase_studyName)
-    #vars <- names(hot_fb_sbase())
+    vars <- names(hot_fb_sbase())
     selectInput(inputId = 'trait_x_eda', 'Select trait (X)', c(Choose='', vars), selectize=TRUE)
     
   })
@@ -235,7 +235,7 @@ edaplant_sbase_server <- function(input, output, session, values){
   output$sel_traitY_eda <- renderUI({
     req(input$eda_sbase_studyName)
     vars <- names(hot_fb_sbase())
-    #print(vars)
+   
     selectInput(inputId = 'trait_y_eda', 'Select trait (Y)',  c(Choose='', vars), selectize=TRUE)
     
   })

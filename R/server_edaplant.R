@@ -76,7 +76,7 @@ edaplant_server <- function(input, output, session, values){
   
   
   output$sel_traitX_eda <- renderUI({
-    req(input$file_eda)
+    req(input$file_eda) 
     vars <- names(hot_bdata())
     selectInput(inputId = 'trait_x_eda', 'Select trait (X)', c(Choose='', vars), selectize=TRUE)
     
@@ -85,7 +85,7 @@ edaplant_server <- function(input, output, session, values){
   output$sel_traitY_eda <- renderUI({
     req(input$file_eda)
     vars <- names(hot_bdata())
-    selectInput(inputId = 'trait_y_eda', 'Select trait (Y)',  c(Choose='', vars), selectize=TRUE)
+    selectInput(inputId = 'trait_y_eda', 'Select trait (Y)', c(Choose='', vars), selectize=TRUE)
     
   })
   
@@ -105,6 +105,7 @@ edaplant_server <- function(input, output, session, values){
     # ydata <- fb[, ycol]
 
     fb <- as.data.frame(hot_bdata()) #fieldboook
+    write.csv(fb,"fb.csv")
     trait <- input$trait_eda    #trait  
     gby <- input$gby_eda        #grouped by
     use_dots <- input$dots_eda  #plot points in charts

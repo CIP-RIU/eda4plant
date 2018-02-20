@@ -53,7 +53,8 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                                                               
                                                               
                                                               selectInput("eda_type_chart", "Choose a graph", 
-                                                                          choices = c("boxplot","scatterplot","pairsplot","histogram","density", "ammi"), 
+                                                                          #choices = c("boxplot","scatterplot","pairsplot","histogram","density", "ammi"), 
+                                                                          choices = c("boxplot","scatterplot","histogram","density"),
                                                                           
                                                                           selected = 1),
                                                               
