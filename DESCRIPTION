@@ -14,19 +14,23 @@ Depends:
     R (>= 3.3.0)
 Imports:
     shiny,
-    shinydashboard,
     ggplot2,
-    shinyFiles,
+    shinydashboard,
     readxl,
+    shinyFiles,
     GGally,
     ggrepel,
-    st4gi
-Remotes: omarbenites/shinyFiles
+    st4gi,
+    brapi,
+    data.table,
+    dplyr,
+    purrr
+Remotes: omarbenites/shinysky  
 Copyright: International Potato Center (2017)
 License: GPL + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Suggests:
     covr,
     testthat

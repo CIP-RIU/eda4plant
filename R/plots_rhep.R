@@ -27,16 +27,16 @@
 
 #' Boxplot and dotplot
 #' 
-#' @description Plots genotypes. Two options:
+#' Return a boxplot or dotplot chart
+#' 
 #' @param trait trait
 #' @param by grouped by
 #' @param dots use dot 
 #' @param fb field book data
-#' @author Raul Eyzaguirre
+#' @description Plots two types of graphics: a boxplot and doplot.
+#' @author Omar Benites Raul Eyzaguirre
 #' @export
-# 1. Original values
-# 2. Means over replications
-# Use the by argument to get facets
+
 
 plot_box <- function(trait, by = NULL, dots = c("no", "yes"), fb) {
   
@@ -74,18 +74,16 @@ plot_box <- function(trait, by = NULL, dots = c("no", "yes"), fb) {
 # plot_box("y1", "env", "yes", fb)
 # 
 
-#' Histogram
-#' @description Plots genotypes. Two options:
+#' Histogram for plant breeding traits
+#' 
 #' @param trait trait
 #' @param bins number of partitions or intervals.
 #' @param by grouped by
 #' @param fb field book data
-#' @author Raul Eyzaguirre
+#' @author Raul Eyzaguirre Omar Benites
+#' @description Plots two types of histogram: By trait and by trait x genotypes.
 #' @export
 #' 
-# 1. Original values
-# 2. Means over replications
-# Use the by argument to get facets
 
 plot_hist <- function(trait, bins, by = NULL, fb) {
   
@@ -105,11 +103,11 @@ plot_hist <- function(trait, bins, by = NULL, fb) {
 
 
 #' Density plot
-#' @description Plots genotypes. Two options: # 1. original values or #2, means over replications
+#' @description Plots genotypes. Two options:  1. original values or 2, means over replications
 #' @param trait trait
 #' @param by grouped by
 #' @param fb field book data
-#' @author Raul Eyzaguirre
+#' @author Raul Eyzaguirre Omar Benites
 #' @export
 #' 
 plot_dens <- function(trait, by = NULL, fb) {
@@ -130,12 +128,13 @@ plot_dens <- function(trait, by = NULL, fb) {
 #   
 #   
 #'  Scatterplot for two traits
-#' @description Options: # 1. Original values, #2. Means over replications and  #3. Means over replications and environments. With facets: # One facet for each environment
-#' @param trait trait.1
-#' @param trait trait.2
+#' @description Options: 1. Original values, 2. Means over replications and  3. Means over replications and environments. 
+#' With facets: One facet for each environment
+#' @param trait.1 first trait
+#' @param trait.2 second trait
 #' @param by grouped by
 #' @param fb field book data
-#' @author Raul Eyzaguirre
+#' @author Raul Eyzaguirre Omar Benites
 #' @export
 #' 
 plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
@@ -158,10 +157,12 @@ plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
 
 
 #' Scatterplot for more than two traits
-#' @description Options: #1. Original values. #2. Means over replications.#3. Means over replications and environments.
-#' @param columns traits that we displayed in a dispersion matrix.
+#' 
+#' @param traits names of the traits. At least 2 to display a dispersion matrix.
 #' @param fb field book data
-#' @author Raul Eyzaguirre
+#' @author Raul Eyzaguirre Omar Benites
+#' @description Options: 1. Original values. 2. Means over replications. 
+#' 3. Means over replications and environments.
 #' @export
 #' 
 plot_pairs <- function(traits, fb) {
@@ -174,15 +175,17 @@ plot_pairs <- function(traits, fb) {
 
 
 #' AMMI and GGE 
-#' @description Only for MET data # Should run function ammi first
-#' @param model model 
+#' @param model model for the ammi or gge  
 #' @param biplot 1. genotype and environment effects. 2. principal components
+#' @description Only for MET data should run function ammi first.
 #' @author Raul Eyzaguirre
 #' @export
 #' 
 plot_ammi <- function(model, biplot) {
 
   # arguments
+  Trait <- Method <- Overall_mean <- Genotype_means <- Environment_means <- Interaction_means <- PC_values_genotypes <- Contribution_PCs <- Cont <- NULL
+  
   method <- model$Method
   trait <- model$Trait
   overall.mean <- model$Overall_mean

@@ -7,18 +7,18 @@
 plot_scat(trait.1, trait.2, by = NULL, fb)
 }
 \arguments{
+\item{trait.1}{first trait}
+
+\item{trait.2}{second trait}
+
 \item{by}{grouped by}
 
 \item{fb}{field book data}
-
-\item{trait}{trait.1}
-
-\item{trait}{trait.2}
 }
 \description{
-Options: # 1. Original values, #2. Means over replications and  #3. Means over replications and environments. With facets: # One facet for each environment
+Options: 1. Original values, 2. Means over replications and  3. Means over replications and environments. 
+With facets: One facet for each environment
 }
 \author{
-Raul Eyzaguirre
+Raul Eyzaguirre Omar Benites
 }
-

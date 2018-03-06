@@ -7,14 +7,13 @@
 plot_ammi(model, biplot)
 }
 \arguments{
-\item{model}{model}
+\item{model}{model for the ammi or gge}
 
 \item{biplot}{1. genotype and environment effects. 2. principal components}
 }
 \description{
-Only for MET data # Should run function ammi first
+Only for MET data should run function ammi first.
 }
 \author{
 Raul Eyzaguirre
 }
-
