@@ -3,12 +3,11 @@
 #' @description user interface for EDA for SweetPotato Base
 #' @author Omar Benites
 #' @param type type of UI element, deault is a tab in a shinydashboard
-#' @param title diaply title name
+#' @param title title name
 #' @param name UI TabName
 #' @importFrom shinydashboard box
 #' @importFrom shinyFiles parseFilePaths
 #' @export
-
 
 edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis", name= "eda_plot_module"){
   
@@ -150,45 +149,17 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                                                             
                                                             #          selectInput('facet_row', 'Facet Row', c(None='.', names(dataset))),
                                                             #          selectInput('facet_col', 'Facet Column', c(None='.', names(dataset)))
-                                                     )
-                                                     
-                                                     
-                                                     
-                                                     
-                                                     
-                                                     
-                                                     
-                                                       )#end fluidRow edatypechart      
-                                                     
-                                                     # fluidRow(
-                                                     #   column(3,
-                                                     #          h4("Diamonds Explorer"),
-                                                     #          sliderInput('sampleSize', 'Sample Size', 
-                                                     #                      min=1, max=nrow(dataset), value=min(1000, nrow(dataset)), 
-                                                     #                      step=500, round=0),
-                                                     #          br(),
-                                                     #          checkboxInput('jitter', 'Jitter'),
-                                                     #          checkboxInput('smooth', 'Smooth')
-                                                     #   ),
-                                                     #   column(4, offset = 1,
-                                                     #          selectInput('x', 'X', names(dataset)),
-                                                     #          selectInput('y', 'Y', names(dataset), names(dataset)[[2]]),
-                                                     #          selectInput('color', 'Color', c('None', names(dataset)))
-                                                     #   ),
-                                                     #   column(4,
-                                                     #          selectInput('facet_row', 'Facet Row', c(None='.', names(dataset))),
-                                                     #          selectInput('facet_col', 'Facet Column', c(None='.', names(dataset)))
-                                                     #   )
-                                                     # )   
-                                                     
-                                                     
-                                                     
-                                                       ) #end column layout
-                                              
-                                              
-                                              
                                                        )
-                                                     )
+                                                     
+                                                     
+                                                     )#end fluidRow edatypechart      
+                                             
+                                                   ) #end column layout
+                                              
+                                              
+                                              
+                                               )
+                                            )
                             )
   )
                             )

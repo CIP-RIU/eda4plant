@@ -2,7 +2,11 @@
 % Please edit documentation in R/plots_rhep.R
 \name{plot_hist}
 \alias{plot_hist}
+<<<<<<< HEAD
 \title{Histogram}
+=======
+\title{Histogram for plant breeding traits}
+>>>>>>> 34e27d76d6132da2ca95bd214c14628965d606fa
 \usage{
 plot_hist(trait, bins, by = NULL, fb)
 }
@@ -16,9 +20,12 @@ plot_hist(trait, bins, by = NULL, fb)
 \item{fb}{field book data}
 }
 \description{
+<<<<<<< HEAD
 Plots genotypes. Two options:
+=======
+Plots two types of histogram: By trait and by trait x genotypes.
+>>>>>>> 34e27d76d6132da2ca95bd214c14628965d606fa
 }
 \author{
-Raul Eyzaguirre
+Raul Eyzaguirre Omar Benites
 }
-

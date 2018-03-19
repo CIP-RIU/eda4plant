@@ -16,9 +16,11 @@ plot_box(trait, by = NULL, dots = c("no", "yes"), fb)
 \item{fb}{field book data}
 }
 \description{
-Plots genotypes. Two options:
+Plots two types of graphics: a boxplot and doplot.
+}
+\details{
+Return a boxplot or dotplot chart
 }
 \author{
-Raul Eyzaguirre
+Omar Benites Raul Eyzaguirre
 }
-

@@ -14,9 +14,8 @@ plot_dens(trait, by = NULL, fb)
 \item{fb}{field book data}
 }
 \description{
-Plots genotypes. Two options: # 1. original values or #2, means over replications
+Plots genotypes. Two options:  1. original values or 2, means over replications
 }
 \author{
-Raul Eyzaguirre
+Raul Eyzaguirre Omar Benites
 }
-

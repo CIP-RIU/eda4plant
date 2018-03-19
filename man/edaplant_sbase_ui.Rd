@@ -10,7 +10,7 @@ edaplant_sbase_ui(type = "tab", title = "Exploratory Data Analysis",
 \arguments{
 \item{type}{type of UI element, deault is a tab in a shinydashboard}
 
-\item{title}{diaply title name}
+\item{title}{title name}
 
 \item{name}{UI TabName}
 }
@@ -20,4 +20,3 @@ user interface for EDA for SweetPotato Base
 \author{
 Omar Benites
 }
-

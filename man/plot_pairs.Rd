@@ -7,14 +7,18 @@
 plot_pairs(columns, fb)
 }
 \arguments{
+<<<<<<< HEAD
 \item{columns}{traits that we displayed in a dispersion matrix.}
+=======
+\item{traits}{names of the traits. At least 2 to display a dispersion matrix.}
+>>>>>>> 34e27d76d6132da2ca95bd214c14628965d606fa
 
 \item{fb}{field book data}
 }
 \description{
-Options: #1. Original values. #2. Means over replications.#3. Means over replications and environments.
+Options: 1. Original values. 2. Means over replications. 
+3. Means over replications and environments.
 }
 \author{
-Raul Eyzaguirre
+Raul Eyzaguirre Omar Benites
 }
-

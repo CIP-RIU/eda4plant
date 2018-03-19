@@ -2,7 +2,8 @@
 % Please edit documentation in R/server_edaplant.R
 \name{edaplant_server}
 \alias{edaplant_server}
-\title{Server EDA}
+\title{Server EDA
+Return the server component for exploratory graphics}
 \usage{
 edaplant_server(input, output, session, values)
 }
@@ -21,4 +22,3 @@ server side for EDA
 \author{
 Omar Benites
 }
-

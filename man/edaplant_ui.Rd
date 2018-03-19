@@ -2,7 +2,8 @@
 % Please edit documentation in R/ui_edaplant.R
 \name{edaplant_ui}
 \alias{edaplant_ui}
-\title{UI for EDA}
+\title{UI for EDA
+Returns a user interface for exploratory graphics}
 \usage{
 edaplant_ui(type = "tab", title = "Exploratory Data Analysis",
   name = "eda_plot_module")
@@ -20,4 +21,3 @@ user interface for EDA
 \author{
 Omar Benites
 }
-

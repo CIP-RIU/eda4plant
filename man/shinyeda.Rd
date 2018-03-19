@@ -27,4 +27,3 @@ shinyeda()
 }
 Run a simple example app using the eda4plant functionality
 }
-
