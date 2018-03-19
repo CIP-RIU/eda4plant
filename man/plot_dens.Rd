@@ -19,3 +19,4 @@ Plots genotypes. Two options:  1. original values or 2, means over replications
 \author{
 Raul Eyzaguirre Omar Benites
 }
+

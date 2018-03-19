@@ -4,18 +4,12 @@
 \alias{plot_scat}
 \title{Scatterplot for two traits}
 \usage{
-plot_scat(traitX, traitY, by = NULL, fb)
+plot_scat(trait.1, trait.2, by = NULL, fb)
 }
 \arguments{
-<<<<<<< HEAD
-\item{traitX}{trait X}
-
-\item{traitY}{trait Y}
-=======
 \item{trait.1}{first trait}
 
 \item{trait.2}{second trait}
->>>>>>> 34e27d76d6132da2ca95bd214c14628965d606fa
 
 \item{by}{grouped by}
 
@@ -28,3 +22,4 @@ With facets: One facet for each environment
 \author{
 Raul Eyzaguirre Omar Benites
 }
+

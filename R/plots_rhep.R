@@ -47,10 +47,10 @@ plot_box <- function(trait, by = NULL, dots = c("no", "yes"), fb) {
       ggplot(fb, aes_string(shQuote(""), trait)) +
         geom_boxplot() +
         xlab("")
-      } else {
-        ggplot(fb, aes_string(by, trait)) +
-          geom_boxplot()
-      }
+    } else {
+      ggplot(fb, aes_string(by, trait)) +
+        geom_boxplot()
+    }
     
   } else {
     
@@ -59,11 +59,11 @@ plot_box <- function(trait, by = NULL, dots = c("no", "yes"), fb) {
         geom_boxplot() +
         xlab("") +
         geom_jitter(width = 0.35)
-      } else {
-        ggplot(fb, aes_string(by, trait)) +
-          geom_boxplot() +
-          geom_jitter(width = 0.35)
-      }
+    } else {
+      ggplot(fb, aes_string(by, trait)) +
+        geom_boxplot() +
+        geom_jitter(width = 0.35)
+    }
   }
   
 }
@@ -95,7 +95,7 @@ plot_hist <- function(trait, bins, by = NULL, fb) {
       geom_histogram(aes_string(trait), bins = bins, col = 1, alpha = 0.5) +
       facet_wrap(by)
   }
-
+  
 }
 # 
 # plot_hist("y1", 15, fb = fb)
@@ -111,16 +111,16 @@ plot_hist <- function(trait, bins, by = NULL, fb) {
 #' @export
 #' 
 plot_dens <- function(trait, by = NULL, fb) {
-    
-    if(is.null(by)) {
-      ggplot(fb) +
-        geom_density(aes_string(trait))
-    } else {
-      ggplot(fb) +
-        geom_density(aes_string(trait)) +
-        facet_wrap(by)
-    }
-    
+  
+  if(is.null(by)) {
+    ggplot(fb) +
+      geom_density(aes_string(trait))
+  } else {
+    ggplot(fb) +
+      geom_density(aes_string(trait)) +
+      facet_wrap(by)
+  }
+  
 }
 
 # plot_dens("y1", fb = fb)
@@ -128,34 +128,28 @@ plot_dens <- function(trait, by = NULL, fb) {
 #   
 #   
 #'  Scatterplot for two traits
-<<<<<<< HEAD
-#' @description Options: # 1. Original values, #2. Means over replications and  #3. Means over replications and environments. With facets: # One facet for each environment
-#' @param traitX trait X
-#' @param traitY trait Y
-=======
 #' @description Options: 1. Original values, 2. Means over replications and  3. Means over replications and environments. 
 #' With facets: One facet for each environment
 #' @param trait.1 first trait
 #' @param trait.2 second trait
->>>>>>> 34e27d76d6132da2ca95bd214c14628965d606fa
 #' @param by grouped by
 #' @param fb field book data
 #' @author Raul Eyzaguirre Omar Benites
 #' @export
 #' 
-plot_scat <- function(traitX, traitY, by = NULL, fb) {
+plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
   
   if (is.null(by)) {
-    ggplot(fb, aes_string(traitX, traitY)) +
+    ggplot(fb, aes_string(trait.1, trait.2)) +
       geom_point() +
       geom_smooth()    
   } else {
-    ggplot(fb, aes_string(traitX, traitY)) +
+    ggplot(fb, aes_string(trait.1, trait.2)) +
       geom_point() +
       geom_smooth() +
       facet_wrap(by)
   }
-
+  
 }
 
 # plot_scat("y1", "y2", fb = fb)
@@ -171,11 +165,10 @@ plot_scat <- function(traitX, traitY, by = NULL, fb) {
 #' 3. Means over replications and environments.
 #' @export
 #' 
-plot_pairs <- function(columns, fb) {
+plot_pairs <- function(traits, fb) {
   
-  traits <- columns
   ggpairs(data = fb, columns = traits, lower = list(continuous = "smooth"))
-
+  
 }
 
 #plot_pairs(traits, fb)
@@ -189,7 +182,7 @@ plot_pairs <- function(columns, fb) {
 #' @export
 #' 
 plot_ammi <- function(model, biplot) {
-
+  
   # arguments
   Trait <- Method <- Overall_mean <- Genotype_means <- Environment_means <- Interaction_means <- PC_values_genotypes <- Contribution_PCs <- Cont <- NULL
   
@@ -202,7 +195,7 @@ plot_ammi <- function(model, biplot) {
   G <- model$PC_values_genotypes
   E <- model$PC_values_environments
   PC.cont <- model$Contribution_PCs$Cont
-
+  
   #  Biplot 1
   
   if (biplot == 1) {
@@ -231,7 +224,7 @@ plot_ammi <- function(model, biplot) {
     fbg <- data.frame(names = rownames(int.mean), x = G[, 1], y = G[, 2], group = "g")
     fbe <- data.frame(names = colnames(int.mean), x = E[, 1], y = E[, 2], group = "e")
     fb <- rbind(fbg, fbe)
-  
+    
   }  
   
   ggplot(fb, aes(x, y, label = names, color = factor(group))) + 
