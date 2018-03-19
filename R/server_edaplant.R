@@ -58,7 +58,7 @@ edaplant_server <- function(input, output, session, values){
   output$sel_trait_eda <- renderUI({
     #req(input$file_eda)
     req(input$file_eda_input)
-    print(hot_bdata())
+    #print(hot_bdata())
     vars <- names(hot_bdata())
     type_chart <- input$eda_type_chart
 
@@ -119,7 +119,7 @@ edaplant_server <- function(input, output, session, values){
     req(input$file_eda_input)
     
     fb <- as.data.frame(hot_bdata()) #fieldboook
-    print(fb)
+    #print(fb)
     
     gby <- input$gby_eda        #grouped by
     use_dots <- input$dots_eda  #plot points in charts
