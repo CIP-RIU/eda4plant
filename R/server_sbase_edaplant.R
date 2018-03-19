@@ -291,7 +291,11 @@ edaplant_sbase_server <- function(input, output, session, values){
     # ycol <- input$ycol
     req(input$eda_sbase_studyName)
     
- 
+    print(input$eda_sbase_studyName)  
+    print(input$eda_selProgram_sbase)
+    print(input$eda_sbase_trialName)
+    
+    
     fb <- as.data.frame(hot_fb_sbase()) #fieldboook
     
     # trait <- input$trait_eda    #trait  
@@ -451,8 +455,6 @@ edaplant_sbase_server <- function(input, output, session, values){
         res_plot <- plot_ammi(model, 2) 
       }
       
-     
- 
     }
     
     

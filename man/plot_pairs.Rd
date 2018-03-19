@@ -4,12 +4,12 @@
 \alias{plot_pairs}
 \title{Scatterplot for more than two traits}
 \usage{
-plot_pairs(traits, fb)
+plot_pairs(columns, fb)
 }
 \arguments{
-\item{fb}{field book data}
-
 \item{columns}{traits that we displayed in a dispersion matrix.}
+
+\item{fb}{field book data}
 }
 \description{
 Options: #1. Original values. #2. Means over replications.#3. Means over replications and environments.

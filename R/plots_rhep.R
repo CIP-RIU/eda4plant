@@ -131,21 +131,21 @@ plot_dens <- function(trait, by = NULL, fb) {
 #   
 #'  Scatterplot for two traits
 #' @description Options: # 1. Original values, #2. Means over replications and  #3. Means over replications and environments. With facets: # One facet for each environment
-#' @param trait trait.1
-#' @param trait trait.2
+#' @param traitX trait X
+#' @param traitY trait Y
 #' @param by grouped by
 #' @param fb field book data
 #' @author Raul Eyzaguirre
 #' @export
 #' 
-plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
+plot_scat <- function(traitX, traitY, by = NULL, fb) {
   
   if (is.null(by)) {
-    ggplot(fb, aes_string(trait.1, trait.2)) +
+    ggplot(fb, aes_string(traitX, traitY)) +
       geom_point() +
       geom_smooth()    
   } else {
-    ggplot(fb, aes_string(trait.1, trait.2)) +
+    ggplot(fb, aes_string(traitX, traitY)) +
       geom_point() +
       geom_smooth() +
       facet_wrap(by)
@@ -164,8 +164,9 @@ plot_scat <- function(trait.1, trait.2, by = NULL, fb) {
 #' @author Raul Eyzaguirre
 #' @export
 #' 
-plot_pairs <- function(traits, fb) {
+plot_pairs <- function(columns, fb) {
   
+  traits <- columns
   ggpairs(data = fb, columns = traits, lower = list(continuous = "smooth"))
 
 }

@@ -4,16 +4,16 @@
 \alias{plot_scat}
 \title{Scatterplot for two traits}
 \usage{
-plot_scat(trait.1, trait.2, by = NULL, fb)
+plot_scat(traitX, traitY, by = NULL, fb)
 }
 \arguments{
+\item{traitX}{trait X}
+
+\item{traitY}{trait Y}
+
 \item{by}{grouped by}
 
 \item{fb}{field book data}
-
-\item{trait}{trait.1}
-
-\item{trait}{trait.2}
 }
 \description{
 Options: # 1. Original values, #2. Means over replications and  #3. Means over replications and environments. With facets: # One facet for each environment
