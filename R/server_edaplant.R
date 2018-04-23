@@ -131,6 +131,13 @@ edaplant_server <- function(input, output, session, values){
       trait <- input$trait_eda    #trait  
       trait<-  fb[, trait]
       
+      #shiny alert for boxplot
+      hasValue <- all(is.na(trait))
+      
+      if(hasValue){
+        shinysky::showshinyalert(session, "alert_eda_done", paste("Warning: ",input$trait_eda," has no values"), styleclass = "danger")
+      }
+      
       
       #req(input$trait_eda)
       
@@ -164,6 +171,14 @@ edaplant_server <- function(input, output, session, values){
       trait <- input$trait_eda    #trait  
       trait<-  fb[, trait]
       
+      hasValue <- all(is.na(trait)) #It return TRUE if all is NA, FALSE is have some data
+      
+      if(hasValue){
+        shinysky::showshinyalert(session, "alert_eda_done", paste("Warning: ",input$trait_eda," has no values"), styleclass = "danger")
+      }
+      
+      
+      
       if(gby == ""){
         res_plot <- plot_hist(trait, bins, fb = fb)
       }
@@ -182,9 +197,24 @@ edaplant_server <- function(input, output, session, values){
       
       traitX <- input$trait_x_eda #scatterplot
       traitX <- fb[,traitX]
+      hasValueX <- all(is.na(traitX))
       
       traitY <- input$trait_y_eda #scatterplot
       traitY <- fb[,traitY]
+      hasValueY <- all(is.na(traitY))
+      
+      if(hasValueX){
+        shinysky::showshinyalert(session, "alert_eda_done", paste("Warning: ",input$trait_x_eda, " has no values", sep=""), styleclass = "warning")
+        #print("X")
+      } else if (hasValueY){
+        #print("Y")
+        shinysky::showshinyalert(session, "alert_eda_done", paste("Warning: ",input$trait_y_eda," has no values", sep=""), styleclass = "warning")
+      } else if (hasValueX && hasValueY) {
+        #print("both")
+        shinysky::showshinyalert(session, "alert_eda_done", paste("Warning: ",input$trait_x_eda, input$trait_y_eda," have no values", sep=""), styleclass = "warning")
+      } else {
+        print("Variables has data")
+      }
       
       
       if(gby == ""){
@@ -205,6 +235,12 @@ edaplant_server <- function(input, output, session, values){
       
       trait <- input$trait_eda    #trait  
       trait<-  fb[, trait]
+      
+      hasValue <- all(is.na(trait))
+      if(hasValue){
+        shinysky::showshinyalert(session, "alert_eda_done", paste("Warning: ",input$trait_eda," has no values", sep=""), styleclass = "warning")
+      }
+      
       
       if(gby == ""){
         res_plot <- plot_dens(trait, fb = fb)

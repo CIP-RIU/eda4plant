@@ -41,7 +41,9 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                                                      br(),
                                                      br(),
                                                      
-                                                     plotOutput('plot1'),
+                                                     shinysky::shinyalert("alert_eda_done", FALSE, auto.close.after = 5),
+                                                     
+                                                     shinycustomloader::withLoader(plotOutput('plot1'), type = "html", loader = "loader4"),
                                                      
                                                      br(),
                                                      br(),
@@ -149,16 +151,31 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                                                             
                                                             #          selectInput('facet_row', 'Facet Row', c(None='.', names(dataset))),
                                                             #          selectInput('facet_col', 'Facet Column', c(None='.', names(dataset)))
-                                                       )
+                                                       ),
+                                                     
+                                                     br(),
+                                                     br(),
+                                                     br(),
+                                                     br()
                                                      
                                                      
                                                      )#end fluidRow edatypechart      
                                              
-                                                   ) #end column layout
+                                                   ), #end column layout
+                                                    
+                                              br(),
+                                              br(),
+                                              br()   
+                                                 
                                               
                                               
-                                              
-                                               )
+                                               ),
+                                            br(),
+                                            br(),
+                                            br()
+                                            
+                                            
+                                            
                                             )
                             )
   )
