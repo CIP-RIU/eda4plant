@@ -19,7 +19,7 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                             collapsible = TRUE, width = NULL,
                             #tabsetPanel(
                             tabBox(width = 12,
-                                   tabPanel("EDA", #begin tabset "CHECK"
+                                   tabPanel("EDA", #begin tabset "EDA"
                                             fluidRow( 
                                               column(width = 12, #begin column principal layout
                                                      #shinyFiles::shinyFilesButton('file_eda', 'Select File', 'Select a file',FALSE),
@@ -159,8 +159,13 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                                                      br()
                                                      
                                                      
-                                                     )#end fluidRow edatypechart      
-                                             
+                                                     ),#end fluidRow edatypechart      
+                                                     br(),
+                                                     br(),
+                                                     br(),
+                                                     br()
+                                                     
+                                                     
                                                    ), #end column layout
                                                     
                                               br(),
@@ -176,10 +181,19 @@ edaplant_sbase_ui <- function(type = "tab", title = "Exploratory Data Analysis",
                                             
                                             
                                             
-                                            )
-                            )
-  )
-                            )
+                                            )#End TAB Tabset "EDA"
+                            )#End Tab Box
+                    ), #End Box
+                    br(),
+                    br(),
+                    br(),
+                    br(),
+                    br(),
+                    br(),
+                    br()
+  
+  
+            )
   
   
   
